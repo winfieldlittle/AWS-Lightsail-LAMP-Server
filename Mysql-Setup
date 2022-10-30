@@ -19,3 +19,43 @@ Installing WordPress
 	mv wordpress/* ./
 	rm -r wordpress
 	
+Give WordPress Directory Proper Right Privileges
+
+	sudo chown -R bitnami:daemon /opt/bitnami/contact
+	sudo chomd -R g+w /opt/bitnami/contact
+	sudo find /opt/bitnami/contact -type f -exec chmod 664 {} \;
+        sudo find /opt/bitnami/contact -type d -exec chmod 775 {} \;
+	
+Create and edit the sudo nano /opt/bitnami/apache2/conf/vhosts/mukesh.me-vhost.conf
+	
+		<VirtualHost _default_:80>
+		     ServerName radiofreelinux.com
+		      ServerAlias www.radiofreelinux.com
+		      DocumentRoot /opt/bitnami/radiofreelinux.com
+	     	       <Directory "/opt/bitnami/radiofreelinux.com">
+			  Options -Indexes +FollowSymLinks -MultiViews
+			  AllowOverride All
+			  Require all granted
+			</Directory>
+		</VirtualHost>
+		
+		
+Create and edit the sudo namo /opt/bitnami/apache2/conf/vhosts/mukesh.me-https-vhost.conf file
+	
+	<VirtualHost _default_:443>
+		ServerName radiofreelinux.com
+		ServerAlias www.radiofreelinux.com
+		DocumentRoot /opt/bitnami/radiofreelinux.com
+		SSLEngine on
+		SSLCertificateFile "/opt/bitnami/apache2/conf/bitnami/certs/server.crt"
+		SSLCertificateKeyFile "/opt/bitnami/apache2/conf/bitnami/certs/server.key"
+		<Directory "/opt/bitnami/radiofreelinux.com">
+			Options -Indexes +FollowSymLinks -MultiViews
+			AllowOverride All
+			Require all granted
+		</Directory>
+	</VirtualHost>
+
+Restart the Apache server:
+
+	sudo /opt/bitnami/ctlscript.sh restart apache
