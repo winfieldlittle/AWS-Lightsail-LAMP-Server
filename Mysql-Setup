@@ -17,5 +17,5 @@ Installing WordPress
 	wget http://wordpress.org/nightly-builds/wordpress-latest.zip
 	unzip wordpress-latest.zip
 	mv wordpress/* ./
-	rmdir wordpress/
+	rm -r wordpress
 	
