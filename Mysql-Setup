@@ -1,0 +1,21 @@
+Mysql Database Command Line
+
+Assuming a mysql db is installed
+
+	mysqladmin -u root password 'new-password-here';
+	mysqladmin -u root -h wordpress password 'new-password';
+
+	mysql
+	mysql> CREATE DATRABASE wordpress;
+	mysql> GRANT ALL PRIVILAGES ON wordpress.* TO 'wordpress'@'localhost' IDENTIFIED BY 'password';
+	mysql> FLUSH PRIVILEGES;
+	mysql> quit
+	
+	
+Installing WordPress
+
+	wget http://wordpress.org/nightly-builds/wordpress-latest.zip
+	unzip wordpress-latest.zip
+	mv wordpress/* ./
+	rmdir wordpress/
+	
